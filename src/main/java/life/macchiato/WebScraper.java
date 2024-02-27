@@ -60,8 +60,7 @@ public class WebScraper {
 
     }
     @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
+    protected void finalize() {
         client.close();
     }
 }
