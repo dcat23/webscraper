@@ -1,36 +1,58 @@
 package life.macchiato;
 
+import lombok.Getter;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.html.DomNodeList;
 import org.htmlunit.html.HtmlPage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class WebScraper {
 
-    private final WebClient client;
+    public static HtmlPage getPage(URL url) {
+        HtmlPage page = null;
+        try(WebClient client = new WebClientFactory.builder().build())
+        {
+            page = client.getPage(url);
 
-    public WebScraper() {
-        client = new WebClient();
-        client.getOptions().setCssEnabled(false);
-        client.getOptions().setCssEnabled(false);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return page;
     }
 
-    public WebScraper(builder b) {
-        client = new WebClient();
-        client.getOptions().setCssEnabled(b.cssEnabled);
-        client.getOptions().setCssEnabled(b.jsEnabled);
+
+    public static Node select(String selector, URL url) {
+        HtmlPage page = getPage(url);
+        DomNode domNode = page.querySelector(selector);
+        return new Node(domNode);
+
+
     }
 
-    public static class builder {
+    public static NodeList selectAll(String selector, URL url) {
+        HtmlPage page = getPage(url);
+        DomNodeList<DomNode> domNodes = page.querySelectorAll(selector);
+        return new NodeList(domNodes.stream()
+                .map(Node::new)
+                .collect(Collectors.toList()));
+
+
+    }
+
+    protected static class builder {
         private boolean cssEnabled = false;
         private boolean jsEnabled = false;
 
-        public WebScraper build() {
-            return new WebScraper(this);
+        public WebClient build() {
+            WebClient client = new WebClient();
+            client.getOptions().setCssEnabled(cssEnabled);
+            client.getOptions().setJavaScriptEnabled(jsEnabled);
+            return client;
         }
 
         public builder enableCss() {
@@ -43,24 +65,4 @@ public class WebScraper {
         }
     }
 
-    public Node select(String selector, URL url) throws IOException {
-        HtmlPage page = client.getPage(url);
-        DomNode domNode = page.querySelector(selector);
-        return new Node(domNode);
-
-
-    }
-
-    public List<Node> selectAll(String selector, URL url) throws IOException {
-        HtmlPage page = client.getPage(url);
-        return page.querySelectorAll(selector).stream()
-                .map(Node::new)
-                .collect(Collectors.toList());
-
-
-    }
-    @Override
-    protected void finalize() {
-        client.close();
-    }
 }
