@@ -1,12 +1,13 @@
 package life.macchiato;
 
+import life.macchiato.webscraper.URLBuilder;
+import life.macchiato.webscraper.WebClientFactory;
 import org.htmlunit.html.HtmlPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class WebClientFactoryTest {
 

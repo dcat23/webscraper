@@ -1,4 +1,4 @@
-package life.macchiato;
+package life.macchiato.webscraper;
 
 import java.net.MalformedURLException;
 import java.net.URL;

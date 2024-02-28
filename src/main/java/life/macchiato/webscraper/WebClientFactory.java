@@ -1,4 +1,4 @@
-package life.macchiato;
+package life.macchiato.webscraper;
 
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;

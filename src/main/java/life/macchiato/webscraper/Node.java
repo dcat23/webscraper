@@ -1,4 +1,4 @@
-package life.macchiato;
+package life.macchiato.webscraper;
 
 import org.htmlunit.html.DomNode;
 

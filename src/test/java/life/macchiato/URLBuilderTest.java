@@ -1,15 +1,13 @@
 package life.macchiato;
 
-import org.assertj.core.api.Assertions;
+import life.macchiato.webscraper.URLBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.net.URL;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class URLBuilderTest {
 

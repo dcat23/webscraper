@@ -1,6 +1,5 @@
-package life.macchiato;
+package life.macchiato.webscraper;
 
-import lombok.Getter;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomNodeList;
