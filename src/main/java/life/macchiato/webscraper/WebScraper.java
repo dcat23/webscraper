@@ -12,6 +12,9 @@ import java.util.stream.Collectors;
 public class WebScraper {
 
     public static HtmlPage getPage(URL url) {
+        return getPage(url.toString());
+    }
+    public static HtmlPage getPage(String url) {
         HtmlPage page = null;
         try(WebClient client = new WebClientFactory.builder().build())
         {
