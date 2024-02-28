@@ -30,7 +30,6 @@ class URLBuilderTest {
     void shouldBuildURL() {
         URL url = urlBuilder.build();
         assertThat(url.toString()).isEqualTo(BASE_URL);
-
     }
     @Test
     void shouldSetQuery() {
